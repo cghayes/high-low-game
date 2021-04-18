@@ -35,7 +35,7 @@ class GameContainer extends Component {
       userGuess:""
     });
     clearInterval(this.interval);
-    console.log("New Random Number: " + this.state.randNum);
+    console.log("New Random Number: " + this.state.newRand);
   };
 
   // Assign entered value to userGuess:
