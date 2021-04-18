@@ -1,0 +1,42 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  width: 30%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  align-content: center;
+  text-align: center;
+}
+
+.container {
+  border: 4px solid #77ffe2;
+  padding: 15px 60px;
+  background-color: #b9fff0;
+}
+
+button {
+  height: 45px;
+  width: auto;
+  border-radius: 0 7px 7px 0;
+  border: 4px solid #ccc;
+  color: #333;
+  background-color: #eee;
+}
+
+form {
+  height: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  /* padding: 16px 10px; */
+}
+
+.guess-field {
+  border: 2px solid #eee;
+  padding-left: 10px;
+  color: #666;
+  border-radius: 7px 0 0 7px;
+}
