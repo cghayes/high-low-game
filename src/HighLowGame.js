@@ -29,7 +29,7 @@ class GameContainer extends Component {
   reset() {
     this.setState({
       newRand: Math.floor(Math.random() * 999),
-      message: "Enter a new number to start the game.",
+      // message: "Enter a new number to start the game.",
       guessCount: 0,
       time: 10,
       userGuess:""
