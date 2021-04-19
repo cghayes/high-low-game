@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import './main.css';
 
-class GameContainer extends Component {
+
+class HighLowGame extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       newRand: Math.floor(Math.random() * 999) + 1,
       time: 10,
-      message: "Enter a number to begin:",
+      startMessage: "Enter a number to begin:",
+      resultMessage: "...",
       guessResult: "High or low?",
       interval: 0,
       userGuess: "",
@@ -30,6 +31,7 @@ class GameContainer extends Component {
     this.setState({
       newRand: Math.floor(Math.random() * 999),
       // message: "Enter a new number to start the game.",
+      // guessResult: "High or low?",
       guessCount: 0,
       time: 10,
       userGuess:""
@@ -65,7 +67,6 @@ class GameContainer extends Component {
     // if (this.state.time > 0) {
       this.setState({
         time: this.state.time - 1,
-        message: this.state.message = "Keep guessing!"
       });
     // }
     if (this.state.time === 0) {
@@ -86,10 +87,10 @@ class GameContainer extends Component {
     // Add 1 to loseCount if timer reaches 0:
     } else if (this.state.time === 0) {
         this.setState({
-          loseCount: this.state.loseCount + 1
-        });
-        this.setState({
-          message: "Time's up! The random number was " + this.state.newRand + ". Enter a new number to reset and start a new game."
+          loseCount: this.state.loseCount + 1,
+          startMessage: "Enter a new number to reset and start a new game.",
+          guessResult: "You lose!",
+          resultMessage: "Time's up! The random number was " + this.state.newRand + "."
         });
         this.reset();
       }
@@ -97,17 +98,20 @@ class GameContainer extends Component {
     // Check user's guess input:
     if (newGuess > this.state.newRand) {
         this.setState({
-            guessResult:"Last guess was too high!",
-            guessCount: this.state.guessCount + 1
+            guessResult: newGuess + " is too high!",
+            guessCount: this.state.guessCount + 1,
+            resultMessage: this.state.resultMessage = "Keep guessing!"
         });
     } else if (newGuess < this.state.newRand) {
         this.setState({
-            guessResult:"Last guess was too low!",
-            guessCount: this.state.guessCount + 1
+            guessResult: newGuess + " is too low!",
+            guessCount: this.state.guessCount + 1,
+            resultMessage: this.state.resultMessage = "Keep guessing!"
         });
     } else {
         this.setState({
-            guessResult: "You got it! The random number was " + this.state.newRand + ".",
+            guessResult: "You got it!",
+            resultMessage: "The random number is " + this.state.newRand + ". Enter a new number to reset and start a new game.",
             winCount: this.state.winCount + 1
         });
         this.reset();
@@ -142,16 +146,23 @@ class GameContainer extends Component {
     return (
       <div className="container">
       <h1>Guess the Number</h1>
-      <h3>Guess the random number between 1 and 999.</h3>
-      <p>You have 60 seconds to guess the correct number. The timer will begin when you enter your first guess.</p>
-      <p>{this.state.message}</p>
+      <h3>Guess the random number between 0 and 999.</h3>
+      <p>You have 60 seconds to guess the correct number. The game will let you know if your guess is higher or lower than the secret random number.</p>
+      <p>The 60 second timer will begin when you enter your first guess.</p>
+      <p>{this.state.startMessage}</p>
         <form onSubmit={this.handleForm}>
-            <input className="guess-field" type="number" value={this.state.userGuess} onChange={this.updateInput}
-            onFocus={e=>e.currentTarget.select()} placeholder="Enter guess"
-            ref="guess_field"></input>
+            <input className="guess-field"
+                   type="number"
+                   value={this.state.userGuess}
+                   onChange={this.updateInput}
+                   onFocus={e=>e.currentTarget.select()}
+                   placeholder="Enter guess"
+                   ref="guess_field">
+            </input>
             <button type="submit">Guess</button>
         </form>
         <p>{this.state.guessResult}</p>
+        <p>{this.state.resultMessage}</p>
         <p>Time Remaining: {this.state.time}</p>
         <p>Guesses taken this round: {this.state.guessCount}</p>
         <p>Times Won: {this.state.winCount}</p>
@@ -161,4 +172,4 @@ class GameContainer extends Component {
   }
 }
 
-export default GameContainer;
+export default HighLowGame;
