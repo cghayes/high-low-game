@@ -7,10 +7,10 @@ class HighLowGame extends Component {
 
     this.state = {
       newRand: Math.floor(Math.random() * 999) + 1,
-      time: 10,
+      time: 60,
       startMessage: "Enter a number to begin:",
-      resultMessage: "...",
-      guessResult: "High or low?",
+      resultMessage: "---",
+      guessResult: "---",
       interval: 0,
       userGuess: "",
       guessCount: 0,
@@ -33,7 +33,7 @@ class HighLowGame extends Component {
       // message: "Enter a new number to start the game.",
       // guessResult: "High or low?",
       guessCount: 0,
-      time: 10,
+      time: 60,
       userGuess:""
     });
     clearInterval(this.interval);
@@ -79,7 +79,7 @@ class HighLowGame extends Component {
     var newGuess = this.state.userGuess;
 
     // Timer start:
-    if (this.state.time === 10) {
+    if (this.state.time === 60) {
         this.interval = setInterval(
           () => this.tick(),
           1000
@@ -110,7 +110,7 @@ class HighLowGame extends Component {
     } else {
         this.setState({
             guessResult: "You got it!",
-            resultMessage: "The random number is " + this.state.newRand + ". Enter a new number to reset and start a new game.",
+            resultMessage: "The random number is " + this.state.newRand + ".",
             winCount: this.state.winCount + 1
         });
         this.reset();
@@ -144,12 +144,15 @@ class HighLowGame extends Component {
   render() {
     return (
       <div className="container">
-      <h1>Guess the Number</h1>
-      <h3>Guess the random number between 0 and 999.</h3>
-      <p>You have 60 seconds to guess the correct number. The game will let you know if your guess is higher or lower than the secret random number.</p>
-      <p>The 60 second timer will begin when you enter your first guess.</p>
-      <p>{this.state.startMessage}</p>
+        <h1 className="title">High Low Game</h1>
+        <h3>Guess the random number between 0 and 999.</h3>
+        <ul>
+        <li>You have 60 seconds to guess the correct number.</li>
+        <li>The game will let you know if your guess is higher or lower than the secret random number.</li>
+        <li>The 60 second timer will begin when you enter your first guess.</li>
+        </ul>
         <form onSubmit={this.handleForm}>
+            <p className="startMessage">{this.state.startMessage}</p>
             <input className="guess-field"
                    type="number"
                    value={this.state.userGuess}
@@ -158,14 +161,15 @@ class HighLowGame extends Component {
                    placeholder="Enter guess"
                    ref="guess_field">
             </input>
-            <button type="submit">Guess</button>
+            <button type="submit">Guess!</button>
         </form>
-        <p>{this.state.guessResult}</p>
-        <p>{this.state.resultMessage}</p>
-        <p>Time Remaining: {this.state.time}</p>
-        <p>Guesses taken this round: {this.state.guessCount}</p>
-        <p>Times Won: {this.state.winCount}</p>
-        <p>Times Lost: {this.state.loseCount}</p>
+        <p className="message">{this.state.guessResult} <br /> {this.state.resultMessage}</p>
+        <p>Time Remaining: <br /><span className="timer">{this.state.time}</span></p>
+        <form className="info">
+          <p>Guesses taken: <br /><span className="count">{this.state.guessCount}</span></p>
+          <p>Games Won: <br /><span className="count">{this.state.winCount}</span></p>
+          <p>Games Lost: <br /><span className="count">{this.state.loseCount}</span></p>
+        </form>
       </div>
     );
   }
