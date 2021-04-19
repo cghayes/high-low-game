@@ -75,17 +75,18 @@ class HighLowGame extends Component {
   }
 
   // ================================== //
-  currentGame(){
+  currentGame() {
     var newGuess = this.state.userGuess;
 
     // Timer start:
-    if (this.state.time === 10){
+    if (this.state.time === 10) {
         this.interval = setInterval(
           () => this.tick(),
           1000
         );
+    }
     // Add 1 to loseCount if timer reaches 0:
-    } else if (this.state.time === 0) {
+    if (this.state.time === 0) {
         this.setState({
           loseCount: this.state.loseCount + 1,
           startMessage: "Enter a new number to reset and start a new game.",
@@ -93,10 +94,8 @@ class HighLowGame extends Component {
           resultMessage: "Time's up! The random number was " + this.state.newRand + "."
         });
         this.reset();
-      }
-
-    // Check user's guess input:
-    if (newGuess > this.state.newRand) {
+        // Check user's guess input:
+      } else if (newGuess > this.state.newRand) {
         this.setState({
             guessResult: newGuess + " is too high!",
             guessCount: this.state.guessCount + 1,
