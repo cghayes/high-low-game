@@ -1,6 +1,7 @@
 ITWP 1150 Project 2 - High Low Game
 
 Project objectives:
+
 Using React and Node.js, create an high-low game application.
 - Create a system generated random integer between 0 and 999
 - Provide an input field for the user to guess the random integer
