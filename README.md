@@ -1,4 +1,4 @@
-# ITWP 1150 - High Low Game
+# High Low Game
 
 Project objectives:
 
